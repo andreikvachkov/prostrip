@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro-Strip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Murecho:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/fonts/stylesheet.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const gate = document.getElementById("ageGate");
+            if (!gate) return;
+
+            const yesBtn = gate.querySelector(".age-gate__btn--yes");
+            const noBtn = gate.querySelector(".age-gate__btn--no");
+
+            function openGate() {
+                gate.classList.add("active");
+                document.body.classList.add("no-scroll");
+            }
+
+            function closeGate() {
+                gate.classList.remove("active");
+                document.body.classList.remove("no-scroll");
+            }
+
+            openGate();
+
+            yesBtn?.addEventListener("click", () => {
+                closeGate();
+            });
+
+            noBtn?.addEventListener("click", () => {
+                document.documentElement.innerHTML = "";
+                window.location.replace("about:blank");
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</head>
+
+<body>
+    <div class="age-gate active" id="ageGate">
+        <div class="age-gate__content">
+            <button class="age-gate__btn age-gate__btn--yes" type="button">Да, мне есть 18 лет</button>
+            <button class="age-gate__btn age-gate__btn--no" type="button">Нет, мне ещё нет 18 лет</button>
+        </div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrap">
+                <div class="header__logo">
+                    <a href="/" class="header__logo-link">
+                        <img src="assets/images/logo.svg" alt="">
+                    </a>
+                </div>
+
+                <div class="header__center">
+                    <a href="tel:88002228690" class="header__tel">
+                        8 (800) 222-86-90
+                    </a>
+                </div>
+
+                <div class="header__right">
+                    <button class="header__menu-btn" type="button">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="hero__wrap">
+                <div class="hero__col hero__col--left">
+                    <div class="hero__cell hero__cell--top">
+                        <img src="assets/images/hero-left-ico.svg" alt="">
+                    </div>
+                    <div class="hero__cell hero__cell--bottom">
+                        <div class="hero__contact">
+                            <a href="" class="hero__contact-link">
+                                <img src="assets/images/vk.svg" alt="vk">
+                            </a>
+                            <a href="" class="hero__contact-link">
+                                <img src="assets/images/telegram.svg" alt="Telegram">
+                            </a>
+                        </div>
+                        <a href="" class="hero__btn">
+                            <span>
+                                перейти на сайт
+                            </span>
+                            <img src="assets/images/hero-btn-ico.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="hero__col hero__col--right">
+                    <div class="hero__cell hero__cell--top">
+                        <img src="assets/images/hero-right-ico.svg" alt="">
+                    </div>
+                    <div class="hero__cell hero__cell--bottom">
+                        <a href="" class="hero__btn">
+                            <span>
+                                перейти на сайт
+                            </span>
+                            <img src="assets/images/hero-btn-ico2.svg" alt="">
+                        </a>
+                        <div class="hero__contact">
+                            <a href="" class="hero__contact-link">
+                                <img src="assets/images/vk.svg" alt="vk">
+                            </a>
+                            <a href="" class="hero__contact-link">
+                                <img src="assets/images/telegram.svg" alt="Telegram">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="feedback">
+            <div class="feedback__lava">
+                <div class="feedback__lava-blob feedback__lava-blob--a"></div>
+                <div class="feedback__lava-blob feedback__lava-blob--b"></div>
+                <div class="feedback__lava-blob feedback__lava-blob--c"></div>
+            </div>
+            <div class="feedback__wrap">
+                <img src="assets/images/feedback-mob.png" alt="" class="feedback__bg-mobile">
+                <div class="feedback__left">
+
+                    <form class="form" action="">
+                        <div class="form__content">
+
+                            <div class="form__row error">
+                                <label class="form__label" for="name">Имя</label>
+                                <input class="form__input" id="name" type="text" placeholder="Ваше имя">
+                                <p class="form__error">
+                                    Неправильно введены данные
+                                </p>
+                            </div>
+
+                            <div class="form__row">
+                                <label class="form__label" for="phone">Номер телефона</label>
+                                <input class="form__input" id="phone" type="text" placeholder="+7 (999) 999-99-99">
+                                <p class="form__error">
+                                    Неправильно введены данные
+                                </p>
+                            </div>
+
+                            <div class="form__row">
+                                <label class="form__label" for="club">Выберите клуб</label>
+                                <div class="select" data-select>
+                                    <button class="select__trigger" type="button">
+                                        выберите клуб
+                                    </button>
+                                    <div class="select__dropdown" role="listbox">
+                                        <div class="radio-item">
+                                            <input type="radio" class="radio-input" id="club-1" name="clubs"
+                                                value="club-1">
+                                            <label for="club-1" class="radio-label">MAXIM - ул. Черняховского,
+                                                12А</label>
+                                        </div>
+                                        <div class="radio-item">
+                                            <input type="radio" class="radio-input" id="club-2" name="clubs"
+                                                value="club-2">
+                                            <label for="club-2" class="radio-label">Точка доступа - ул. ленинский
+                                                проспект, 18</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form__policy">
+                            <div class="checkbox">
+                                <input class="checkbox__input" id="policy" type="checkbox">
+                                <label class="checkbox__label" for="policy">
+                                    Я согласен с <a href="">политикой конфиденциальности</a>.
+                                </label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input class="checkbox__input" id="personal" type="checkbox">
+                                <label class="checkbox__label" for="personal">
+                                    Я согласен на обработку персональных данных.
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="form__submit" type="submit">Забронировать стол</button>
+                    </form>
+
+                </div>
+
+                <div class="feedback__right">
+                    <h2 class="feedback__title glitch is-glitching" data-text="Ты выбираешь правила игры">
+                        Ты выбираешь правила игры
+                    </h2>
+                    <div class="feedback__text--mobile">
+                        Заполни форму — и мы подготовим всё, чтобы ночь прошла идеально.
+                    </div>
+                    <img src="assets/images/feedback.png" alt="">
+                </div>
+            </div>
+        </section>
+        <section class="club-gallery-tochka">
+            <div class="club-gallery-tochka__lava">
+                <div class="club-gallery-tochka__lava-blob club-gallery-tochka__lava-blob--a"></div>
+                <div class="club-gallery-tochka__lava-blob club-gallery-tochka__lava-blob--b"></div>
+                <div class="club-gallery-tochka__lava-blob club-gallery-tochka__lava-blob--c"></div>
+            </div>
+            <div class="container">
+                <div class="club-gallery-tochka__wrap">
+                    <div class="club-gallery-tochka__content">
+                        <img class="club-gallery-tochka__logo" src="assets/images/club-gallery-tochka-logo.svg"
+                            alt="Точка доступа">
+                        <div class="swiper club-gallery-tochka__swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider.png" alt="">
+                                </div>
+                            </div>
+                            <button class="club-gallery-tochka__slider-mob-prev club-gallery-tochka__slider-prev">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="59" viewBox="0 0 70 59"
+                                    fill="none">
+                                    <path
+                                        d="M69.0365 30.0202C68.4801 31.5808 67.5063 32.9761 65.893 33.6197C65.6631 33.7108 64.8303 33.9937 64.6564 33.9937L15.5234 33.9937L17.9926 35.3416C22.6489 40.084 28.3331 44.6726 32.7112 49.6219C37.0894 54.5713 32.4659 60.2249 26.8531 57.3639L0.851046 31.7877C-0.203876 30.1379 -0.312071 28.2224 0.717734 26.5346L26.3759 1.15011C31.2081 -2.46268 36.9116 3.16439 33.3121 7.96564L18.6244 22.4073L15.6567 24.1938L64.1155 24.1938C64.4768 24.1938 65.6862 24.5051 66.0688 24.6589C67.6338 25.2854 68.5998 26.751 69.0346 28.3002L69.0346 30.0221L69.0365 30.0202Z"
+                                        fill="white" />
+                                </svg>
+                            </button>
+                            <button class="club-gallery-tochka__slider-mob-next club-gallery-tochka__slider-next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="59" viewBox="0 0 70 59"
+                                    fill="none">
+                                    <path
+                                        d="M-2.92886e-05 30.0202C0.556413 31.5807 1.53018 32.9761 3.14348 33.6197C3.3734 33.7108 4.20613 33.9937 4.38001 33.9937L53.513 33.9937L51.0438 35.3416C46.3875 40.084 40.7033 44.6726 36.3252 49.6219C31.9471 54.5712 36.5706 60.2249 42.1833 57.3639L68.1853 31.7877C69.2403 30.1379 69.3484 28.2223 68.3186 26.5346L42.6605 1.15013C37.8283 -2.46266 32.1248 3.16441 35.7243 7.96564L50.412 22.4073L53.3797 24.1938L4.921 24.1938C4.5597 24.1938 3.35021 24.5051 2.96766 24.6589C1.40267 25.2854 0.436624 26.751 0.00190102 28.3002L0.00190095 30.0221L-2.92886e-05 30.0202Z"
+                                        fill="white" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="club-gallery-tochka__bottom">
+                            <div class="club-gallery-tochka__call-btn__wrap">
+                                <a class="club-gallery-tochka__call-btn" href="#" role="button">
+
+                                    <svg class="border" viewBox="0 0 420 92" preserveAspectRatio="none"
+                                        aria-hidden="true">
+                                        <polyline points="420,0 420,92 0,92 0,0 420,0" class="bg-line" />
+                                        <polyline points="420,0 420,92 0,92 0,0 420,0" class="hl-line" />
+                                    </svg>
+
+
+                                    <span>ЗВОНИ СЕЙЧАС</span>
+                                    <div class="icon">
+                                        <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M42.1883 12.4612V11.3066C42.0792 8.28494 39.268 5.55386 37.0757 3.67783C34.073 1.10707 32.0055 2.85505 29.7331 5.07956C28.5852 6.20295 25.4611 9.16117 24.9935 10.4838C23.8489 13.7226 27.1824 15.6209 28.9693 17.6962C28.544 18.6014 28.0296 19.4654 27.4574 20.2859C26.0768 22.2655 24.0783 24.392 22.2301 25.9452C20.8506 27.1053 19.3621 28.153 17.7321 28.9312L14.559 25.8606C12.8199 24.3965 10.8482 24.3998 9.11353 25.8606C7.57263 27.1587 5.27352 29.5269 3.91632 31.0544C0.643024 34.7374 3.71481 37.0621 6.31229 39.6307C7.63163 40.9344 8.38538 41.7494 10.3471 42.1113C16.1901 43.189 25.2184 37.5253 29.4881 33.7799C34.9102 29.0225 41.7842 19.8617 42.1894 12.4623L42.1883 12.4612ZM34.3747 4.89474C34.6965 4.94707 35.0906 5.2076 35.3433 5.41023C36.2073 6.10163 39.0108 8.94517 39.386 9.86147C40.8868 13.5211 37.3096 20.3717 35.2621 23.4724C30.7707 30.2728 21.3784 38.6832 13.0214 39.7465C9.84389 40.1506 9.40411 39.2354 7.42677 37.2781C6.35905 36.2216 4.08778 34.7987 5.36816 33.0841C7.2208 31.5287 8.97658 29.0325 10.8437 27.5907C11.5084 27.0775 12.1686 27.0819 12.8522 27.5662C13.9711 28.3578 15.993 31.1747 17.1298 31.453C17.6531 31.581 17.9024 31.5142 18.3812 31.3328C22.6064 29.7273 28.7121 23.5559 30.7674 19.5545C31.1883 18.735 31.7783 17.7018 31.3864 16.7888C30.9077 15.6733 28.3581 13.9253 27.5542 12.7863C26.9029 11.8622 27.1768 11.2209 27.8359 10.4393C29.3044 8.69689 31.3486 7.14263 32.8683 5.41023C33.3148 5.05284 33.7802 4.79788 34.3758 4.89474H34.3747Z"
+                                                fill="#E0223B" />
+                                            <path
+                                                d="M18.4346 0.00926236C17.6786 0.105012 16.4116 0.494689 15.6501 0.72961C8.06248 3.07213 1.94786 9.63098 0.247753 17.4079C0.061821 18.2585 -0.37796 19.5066 0.703119 19.923C1.53815 20.2447 2.16386 19.7994 2.40991 18.9922C2.64372 18.224 2.74392 17.3366 2.98998 16.5205C5.00183 9.84698 10.4061 4.70322 17.0986 2.8361C17.7388 2.65685 18.5114 2.58448 19.1138 2.3774C20.3262 1.961 20.2873 0.539225 19.1783 0.00926236C18.9401 0.0304163 18.6673 -0.0196852 18.4357 0.00926236H18.4346Z"
+                                                fill="#E0223B" />
+                                            <path
+                                                d="M20.0545 8.03663C19.4588 7.40535 18.4089 7.76052 17.6741 7.94868C13.136 9.11215 9.34275 12.8731 8.02007 17.3455C7.76065 18.2228 7.15275 19.9931 8.45205 20.3382C10.1421 20.7869 10.1421 18.6058 10.5151 17.5314C11.5895 14.4385 14.1614 11.7842 17.2376 10.6453C17.8867 10.4048 19.3697 10.1754 19.7973 9.90598C20.4163 9.51519 20.5577 8.56882 20.0556 8.03775L20.0545 8.03663Z"
+                                                fill="#E0223B" />
+                                        </svg>
+
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="club-gallery-tochka__slider-btns">
+                                <button
+                                    class="club-gallery-tochka__slider-desctop-prev club-gallery-tochka__slider-prev">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="59" viewBox="0 0 70 59"
+                                        fill="none">
+                                        <path
+                                            d="M69.0365 30.0202C68.4801 31.5808 67.5063 32.9761 65.893 33.6197C65.6631 33.7108 64.8303 33.9937 64.6564 33.9937L15.5234 33.9937L17.9926 35.3416C22.6489 40.084 28.3331 44.6726 32.7112 49.6219C37.0894 54.5713 32.4659 60.2249 26.8531 57.3639L0.851046 31.7877C-0.203876 30.1379 -0.312071 28.2224 0.717734 26.5346L26.3759 1.15011C31.2081 -2.46268 36.9116 3.16439 33.3121 7.96564L18.6244 22.4073L15.6567 24.1938L64.1155 24.1938C64.4768 24.1938 65.6862 24.5051 66.0688 24.6589C67.6338 25.2854 68.5998 26.751 69.0346 28.3002L69.0346 30.0221L69.0365 30.0202Z"
+                                            fill="white" />
+                                    </svg>
+                                </button>
+                                <button
+                                    class="club-gallery-tochka__slider-desctop-next club-gallery-tochka__slider-next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="59" viewBox="0 0 70 59"
+                                        fill="none">
+                                        <path
+                                            d="M-2.92886e-05 30.0202C0.556413 31.5807 1.53018 32.9761 3.14348 33.6197C3.3734 33.7108 4.20613 33.9937 4.38001 33.9937L53.513 33.9937L51.0438 35.3416C46.3875 40.084 40.7033 44.6726 36.3252 49.6219C31.9471 54.5712 36.5706 60.2249 42.1833 57.3639L68.1853 31.7877C69.2403 30.1379 69.3484 28.2223 68.3186 26.5346L42.6605 1.15013C37.8283 -2.46266 32.1248 3.16441 35.7243 7.96564L50.412 22.4073L53.3797 24.1938L4.921 24.1938C4.5597 24.1938 3.35021 24.5051 2.96766 24.6589C1.40267 25.2854 0.436624 26.751 0.00190102 28.3002L0.00190095 30.0221L-2.92886e-05 30.0202Z"
+                                            fill="white" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="promo" style="background: url('assets/images/promo-bg.png') center / cover no-repeat;">
+            <div class="container">
+                <div class="promo__wrap">
+                    <div class="promo__content">
+                        <h2 class="promo__title">
+                            SHOW <br>
+                            reel
+                        </h2>
+                        <button class="promo__btn" data-video="assets/images/video.mp4">
+                            смотреть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="marquee">
+            <div class="container">
+                <div class="marquee__wrap">
+                    <div class="marquee__layer marquee__layer--blur" aria-hidden="true">
+                        <div class="marquee__row">
+                            <div class="marquee__row__items">
+                                <div class="marquee__item">АВТОРСКИЙ БАР</div>
+                                <div class="marquee__item">ПРИВАТНОСТЬ</div>
+                                <div class="marquee__item">vip-сервис</div>
+                            </div>
+                            <div class="marquee__row__items" aria-hidden="true">
+                                <div class="marquee__item">АВТОРСКИЙ БАР</div>
+                                <div class="marquee__item">ПРИВАТНОСТЬ</div>
+                                <div class="marquee__item">vip-сервис</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="marquee__layer marquee__layer--clear">
+                        <div class="marquee__row">
+                            <div class="marquee__row__items">
+                                <div class="marquee__item">АВТОРСКИЙ БАР</div>
+                                <div class="marquee__item">ПРИВАТНОСТЬ</div>
+                                <div class="marquee__item">vip-сервис</div>
+                            </div>
+                            <div class="marquee__row__items" aria-hidden="true">
+                                <div class="marquee__item">АВТОРСКИЙ БАР</div>
+                                <div class="marquee__item">ПРИВАТНОСТЬ</div>
+                                <div class="marquee__item">vip-сервис</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="club-gallery-maxim">
+            <div class="container">
+                <div class="club-gallery-maxim__wrap">
+                    <div class="club-gallery-maxim__content">
+                        <img class="club-gallery-maxim__logo" src="assets/images/club-gallery-maxim-logo.svg"
+                            alt="Точка доступа">
+                        <div class="swiper club-gallery-maxim__swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider-maxim.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider-maxim.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="assets/images/slider-maxim.png" alt="">
+                                </div>
+                            </div>
+                            <button class="club-gallery-maxim__slider-prev club-gallery-maxim__slider-mob-prev">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="51" height="44" viewBox="0 0 51 44"
+                                    fill="none">
+                                    <path
+                                        d="M51 25.1025L12.1471 25.1038L27.0891 39.6936L22.5707 44L-9.63208e-07 22.0356L22.5707 -1.24268e-06L27.0891 4.30766L12.1471 18.8975L51 18.8975L51 25.1025Z"
+                                        fill="white" />
+                                </svg>
+                            </button>
+                            <button class="club-gallery-maxim__slider-next club-gallery-maxim__slider-mob-next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="51" height="44" viewBox="0 0 51 44"
+                                    fill="none">
+                                    <path
+                                        d="M8.88886e-07 25.1025L38.8529 25.1038L23.9109 39.6936L28.4293 44L51 22.0356L28.4293 -1.534e-06L23.9109 4.30766L38.8529 18.8975L6.69164e-07 18.8975L8.88886e-07 25.1025Z"
+                                        fill="white" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="club-gallery-maxim__bottom">
+
+                            <div class="club-gallery-maxim__slider-btns">
+                                <button class="club-gallery-maxim__slider-prev club-gallery-maxim__slider-desctop-prev">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="51" height="44" viewBox="0 0 51 44"
+                                        fill="none">
+                                        <path
+                                            d="M51 25.1025L12.1471 25.1038L27.0891 39.6936L22.5707 44L-9.63208e-07 22.0356L22.5707 -1.24268e-06L27.0891 4.30766L12.1471 18.8975L51 18.8975L51 25.1025Z"
+                                            fill="white" />
+                                    </svg>
+                                </button>
+                                <button class="club-gallery-maxim__slider-next club-gallery-maxim__slider-desctop-next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="51" height="44" viewBox="0 0 51 44"
+                                        fill="none">
+                                        <path
+                                            d="M8.88886e-07 25.1025L38.8529 25.1038L23.9109 39.6936L28.4293 44L51 22.0356L28.4293 -1.534e-06L23.9109 4.30766L38.8529 18.8975L6.69164e-07 18.8975L8.88886e-07 25.1025Z"
+                                            fill="white" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="club-gallery-maxim__call-btn__wrap">
+                                <a class="club-gallery-maxim__call-btn" href="#" role="button">
+                                    <svg class="border" viewBox="0 0 420 92" preserveAspectRatio="none"
+                                        aria-hidden="true">
+                                        <polyline points="420,0 420,92 0,92 0,0 420,0" class="bg-line" />
+                                        <polyline points="420,0 420,92 0,92 0,0 420,0" class="hl-line" />
+                                    </svg>
+                                    <span>ваша линия</span>
+                                    <div class="icon">
+                                        <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M42.1883 12.4612V11.3067C42.0792 8.28497 39.268 5.55389 37.0757 3.67786C34.073 1.1071 32.0055 2.85508 29.7331 5.07959C28.5852 6.20298 25.4611 9.1612 24.9935 10.4839C23.8489 13.7227 27.1824 15.621 28.9693 17.6963C28.544 18.6014 28.0296 19.4654 27.4574 20.286C26.0768 22.2655 24.0783 24.3921 22.2301 25.9452C20.8506 27.1053 19.3621 28.153 17.7321 28.9313L14.559 25.8606C12.8199 24.3965 10.8482 24.3999 9.11353 25.8606C7.57263 27.1588 5.27352 29.5269 3.91632 31.0545C0.643024 34.7375 3.71481 37.0622 6.31229 39.6307C7.63163 40.9345 8.38538 41.7495 10.3471 42.1113C16.1901 43.189 25.2184 37.5253 29.4881 33.78C34.9102 29.0226 41.7842 19.8618 42.1894 12.4623L42.1883 12.4612ZM34.3747 4.89477C34.6965 4.9471 35.0906 5.20763 35.3433 5.41026C36.2073 6.10166 39.0108 8.9452 39.386 9.8615C40.8868 13.5211 37.3096 20.3717 35.2621 23.4724C30.7707 30.2729 21.3784 38.6832 13.0214 39.7465C9.84389 40.1507 9.40411 39.2355 7.42677 37.2782C6.35905 36.2216 4.08778 34.7987 5.36816 33.0841C7.2208 31.5287 8.97658 29.0326 10.8437 27.5908C11.5084 27.0775 12.1686 27.082 12.8522 27.5663C13.9711 28.3579 15.993 31.1747 17.1298 31.453C17.6531 31.5811 17.9024 31.5143 18.3812 31.3328C22.6064 29.7273 28.7121 23.5559 30.7674 19.5545C31.1883 18.735 31.7783 17.7018 31.3864 16.7889C30.9077 15.6733 28.3581 13.9253 27.5542 12.7863C26.9029 11.8622 27.1768 11.2209 27.8359 10.4393C29.3044 8.69692 31.3486 7.14266 32.8683 5.41026C33.3148 5.05287 33.7802 4.79791 34.3758 4.89477H34.3747Z"
+                                                fill="white" />
+                                            <path
+                                                d="M18.4346 0.00926236C17.6786 0.105012 16.4116 0.494689 15.6501 0.72961C8.06248 3.07213 1.94786 9.63098 0.247753 17.4079C0.061821 18.2585 -0.37796 19.5066 0.703119 19.923C1.53815 20.2447 2.16386 19.7994 2.40991 18.9922C2.64372 18.224 2.74392 17.3366 2.98998 16.5205C5.00183 9.84698 10.4061 4.70322 17.0986 2.8361C17.7388 2.65685 18.5114 2.58448 19.1138 2.3774C20.3262 1.961 20.2873 0.539225 19.1783 0.00926236C18.9401 0.0304163 18.6673 -0.0196852 18.4357 0.00926236H18.4346Z"
+                                                fill="white" />
+                                            <path
+                                                d="M20.0545 8.03663C19.4588 7.40535 18.4089 7.76052 17.6741 7.94868C13.136 9.11215 9.34275 12.8731 8.02007 17.3455C7.76065 18.2228 7.15275 19.9931 8.45205 20.3382C10.1421 20.7869 10.1421 18.6058 10.5151 17.5314C11.5895 14.4385 14.1614 11.7842 17.2376 10.6453C17.8867 10.4048 19.3697 10.1754 19.7973 9.90598C20.4163 9.51519 20.5577 8.56882 20.0556 8.03775L20.0545 8.03663Z"
+                                                fill="white" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="promo" style="background: url('assets/images/promo-bg2.png') center / cover no-repeat;">
+            <div class="container">
+                <div class="promo__wrap">
+                    <div class="promo__content">
+                        <h2 class="promo__title">
+                            SHOW <br>
+                            reel
+                        </h2>
+                        <button class="promo__btn" data-video="assets/images/video.mp4">смотреть</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer__wrap">
+                <a href="" class="footer__ploicy-link">
+                    Политика конфидециальности
+                </a>
+                <p class="footer__copyright">
+                    © 2012-2025 Сеть стриптиз клубов "PRO-STRIP"
+                </p>
+            </div>
+        </div>
+    </footer>
+    <div class="menu-popup">
+        <div class="menu-popup__container">
+            <div class="menu-popup__header">
+                <a href="" class="menu-popup__logo">
+                    <img src="assets/images/logo.svg" alt="">
+                </a>
+                <button class="menu-popup__close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                        <path d="M6.54688 6.54541L29.456 29.4545M6.54688 29.4545L29.456 6.54541" stroke="white"
+                            stroke-width="1.50545" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <duv class="menu-popup__clubs">
+                <p class="menu-popup__clubs__text">
+                    наши Клубы
+                </p>
+                <div class="menu-popup__clubs__content">
+                    <a href="" class="menu-popup__club-link">
+                        <img src="assets/images/menu-logo2.svg" alt="">
+                    </a>
+                    <a href="" class="menu-popup__club-link">
+                        <img src="assets/images/menu-logo.svg" alt="">
+                    </a>
+                </div>
+            </duv>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="">
+                            главная
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            О нас
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            Контакты
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="menu-popup__reserve-btn" type="button">
+                Забронировать столик
+            </button>
+        </div>
+    </div>
+    <div class="video-popup" aria-hidden="true">
+        <div class="video-popup__wrap" role="dialog" aria-modal="true">
+            <button class="video-popup__close" type="button" aria-label="Закрыть">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <path d="M6.54688 6.54541L29.456 29.4545M6.54688 29.4545L29.456 6.54541" stroke="white"
+                        stroke-width="1.50545" stroke-linejoin="round" />
+                </svg>
+            </button>
+
+            <div class="video-popup__content"></div>
+        </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

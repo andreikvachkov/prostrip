@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Bebas Neue Cyrillic';
+    src: url('BebasNeueCyrillic.woff2') format('woff2'),
+        url('BebasNeueCyrillic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Furore';
+    src: url('Furore.woff2') format('woff2'),
+        url('Furore.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'a_AvanteLt';
+    src: url('AAvanteLtLightItalic.woff2') format('woff2'),
+        url('AAvanteLtLightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'a_AvanteLt';
+    src: url('AAvanteLtDemiBoldItalic.woff2') format('woff2'),
+        url('AAvanteLtDemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'a_AvanteLt';
+    src: url('AAvanteLtDemiBold.woff2') format('woff2'),
+        url('AAvanteLtDemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'a_AvanteLt';
+    src: url('AAvanteLtLight.woff2') format('woff2'),
+        url('AAvanteLtLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+

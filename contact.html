@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro-Strip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Murecho:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/fonts/stylesheet.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const gate = document.getElementById("ageGate");
+            if (!gate) return;
+
+            const yesBtn = gate.querySelector(".age-gate__btn--yes");
+            const noBtn = gate.querySelector(".age-gate__btn--no");
+
+            function openGate() {
+                gate.classList.add("active");
+                document.body.classList.add("no-scroll");
+            }
+
+            function closeGate() {
+                gate.classList.remove("active");
+                document.body.classList.remove("no-scroll");
+            }
+
+            openGate();
+
+            yesBtn?.addEventListener("click", () => {
+                closeGate();
+            });
+
+            noBtn?.addEventListener("click", () => {
+                document.documentElement.innerHTML = "";
+                window.location.replace("about:blank");
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=e5de0509-d13c-4103-98ec-cc6863d051e2"></script>
+</head>
+
+<body>
+    <div class="age-gate active" id="ageGate">
+        <div class="age-gate__content">
+            <button class="age-gate__btn age-gate__btn--yes" type="button">Да, мне есть 18 лет</button>
+            <button class="age-gate__btn age-gate__btn--no" type="button">Нет, мне ещё нет 18 лет</button>
+        </div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <div class="header__wrap">
+                <div class="header__logo">
+                    <a href="/" class="header__logo-link">
+                        <img src="assets/images/logo.svg" alt="">
+                    </a>
+                </div>
+
+                <div class="header__center">
+                    <a href="tel:88002228690" class="header__tel">
+                        8 (800) 222-86-90
+                    </a>
+                </div>
+
+                <div class="header__right">
+                    <button class="header__menu-btn" type="button">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="contact">
+
+            <div class="container">
+                <div class="contact__wrap">
+                    <h1 class="contact__title glitch is-glitching" data-text="Контакты">
+                        Контакты
+                    </h1>
+                    <div class="contact__main">
+                        <div class="contact__content">
+                            <div class="contact__item">
+                                <p class="contact__name">
+                                    телефон:
+                                </p>
+                                <a href="" class="contact__link">
+                                    8 (800) 222-86-90
+                                </a>
+                            </div>
+                            <div class="contact__item">
+                                <p class="contact__name">
+                                    Режим работы:
+                                </p>
+                                <p class="contact__text">
+                                    ежедневно с 22:00 до 6:00
+                                </p>
+                            </div>
+                            <div class="contact__item">
+                                <p class="contact__name">
+                                    Режим работы:
+                                </p>
+                                <div class="contact__address">
+                                    <p class="name">Точка доступа - Ленинский просп., 18</p>
+                                    <p class="address">
+                                        максим - ул. Черняховского, 6А
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="contact__btn">
+                            забронировать стол
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="contact__map" id="yandex-map"></div>
+        </section>
+    </main>
+    <button class="all-feedback-btn">
+        Забронировать столик
+    </button>
+    <footer>
+        <div class="container">
+            <div class="footer__wrap">
+                <a href="" class="footer__ploicy-link">
+                    Политика конфидециальности
+                </a>
+                <p class="footer__copyright">
+                    © 2012-2025 Сеть стриптиз клубов "PRO-STRIP"
+                </p>
+            </div>
+        </div>
+    </footer>
+    <div class="menu-popup">
+        <div class="menu-popup__container">
+            <div class="menu-popup__header">
+                <a href="" class="menu-popup__logo">
+                    <img src="assets/images/logo.svg" alt="">
+                </a>
+                <button class="menu-popup__close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                        <path d="M6.54688 6.54541L29.456 29.4545M6.54688 29.4545L29.456 6.54541" stroke="white"
+                            stroke-width="1.50545" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <duv class="menu-popup__clubs">
+                <p class="menu-popup__clubs__text">
+                    наши Клубы
+                </p>
+                <div class="menu-popup__clubs__content">
+                    <a href="" class="menu-popup__club-link">
+                        <img src="assets/images/menu-logo2.svg" alt="">
+                    </a>
+                    <a href="" class="menu-popup__club-link">
+                        <img src="assets/images/menu-logo.svg" alt="">
+                    </a>
+                </div>
+            </duv>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="">
+                            главная
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            О нас
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            Контакты
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="menu-popup__reserve-btn" type="button">
+                Забронировать столик
+            </button>
+        </div>
+    </div>
+    <script>
+        ymaps.ready(function () {
+            const points = [
+                [54.713744, 20.505745],
+                [54.719300, 20.504993]
+            ];
+
+            const mapEl = document.getElementById("yandex-map");
+
+            const map = new ymaps.Map("yandex-map", {
+                center: points[0],
+                zoom: 13,
+                controls: ["zoomControl"]
+            });
+
+            map.options.set("suppressMapOpenBlock", true);
+
+            const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="53" height="73" viewBox="0 0 53 73" fill="none">
+  <path d="M31.7827 68.4635C31.0652 69.2874 28.8152 72.029 28.087 72.4801C25.0921 74.3396 23.0919 70.7541 21.4924 68.9038C12.9676 59.0495 3.51366 45.8291 0.690873 32.6838C-5.27156 4.92661 28.8228 -11.126 46.6827 9.04907C62.806 27.2619 44.4586 53.916 31.7842 68.4635H31.7827ZM25.4181 12.317C16.9436 13.0289 12.0338 22.3002 16.3465 29.7903C20.7124 37.3739 31.9929 37.3417 36.333 29.7458C40.9838 21.6052 34.6755 11.5376 25.4181 12.3154V12.317Z" fill="#E23942"/>
+</svg>`.trim();
+
+            const iconHref = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+
+            const iconW = 40;
+            const iconH = 55;
+
+            points.forEach((coords, i) => {
+                const pm = new ymaps.Placemark(
+                    coords,
+                    { balloonContent: `Точка ${i + 1}` },
+                    {
+                        iconLayout: "default#image",
+                        iconImageHref: iconHref,
+                        iconImageSize: [iconW, iconH],
+                        iconImageOffset: [-iconW / 2, -iconH]
+                    }
+                );
+                map.geoObjects.add(pm);
+            });
+            mapEl.classList.add("map-black");
+
+            function fitRight() {
+                const w = map.container.getSize()[0];
+                const leftSpace = Math.round(w * 0.50);
+
+                map.setBounds(map.geoObjects.getBounds(), {
+                    checkZoomRange: true,
+                    zoomMargin: [80, 80, 80, leftSpace]
+                }).then(() => {
+                    map.setZoom(map.getZoom() - 1, { duration: 0 });
+                });
+            }
+
+            fitRight();
+
+            window.addEventListener("resize", () => {
+                clearTimeout(window.__fitRightT);
+                window.__fitRightT = setTimeout(fitRight, 150);
+            });
+        });
+    </script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
