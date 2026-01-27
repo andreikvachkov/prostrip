@@ -127,18 +127,6 @@
     <button class="all-feedback-btn">
         Забронировать столик
     </button>
-    <footer>
-        <div class="container">
-            <div class="footer__wrap">
-                <a href="" class="footer__ploicy-link">
-                    Политика конфидециальности
-                </a>
-                <p class="footer__copyright">
-                    © 2012-2025 Сеть стриптиз клубов "PRO-STRIP"
-                </p>
-            </div>
-        </div>
-    </footer>
     <div class="menu-popup">
         <div class="menu-popup__container">
             <div class="menu-popup__header">
@@ -233,13 +221,22 @@
 
             function fitRight() {
                 const w = map.container.getSize()[0];
-                const leftSpace = Math.round(w * 0.50);
+                const isMob = w < 768;
+
+                const leftSpace = Math.round(w * (isMob ? 0.20 : 0.93));
 
                 map.setBounds(map.geoObjects.getBounds(), {
                     checkZoomRange: true,
-                    zoomMargin: [80, 80, 80, leftSpace]
+                    zoomMargin: isMob ? [40, 40, 40, 40] : [80, 60, 80, leftSpace]
                 }).then(() => {
-                    map.setZoom(map.getZoom() - 1, { duration: 0 });
+                    if (!isMob) {
+                        map.setZoom(map.getZoom() - 1, { duration: 0 });
+                        map.panBy([320, 0], { duration: 0 });
+                        return;
+                    }
+
+                    map.setZoom(14, { duration: 0 });
+                    map.panBy([20, 0], { duration: 0 });
                 });
             }
 

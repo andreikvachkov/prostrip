@@ -139,21 +139,36 @@ header {
     text-align: center;
     font-size: 2.5rem;
     line-height: normal;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: auto;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
     text-transform: uppercase;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 0.125rem;
 }
-.header__tel:hover {
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: auto;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
+.header__tel::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.0625rem;
+    width: 100%;
+    height: 0.1875rem;
+    background-color: #e0223b;
+    scale: 0 1;
+    transition-timing-function: ease;
+    transition-duration: 250ms;
+    transition-property: scale, translate;
+}
+@supports (selector(:has(*))) {
+    .header__tel:hover + .header__tel::after {
+        translate: -100% 0;
+    }
+
+    .header__tel:has(+ .header__tel:hover)::after {
+        translate: 100% 0;
+    }
+}
+
+.header__tel:hover::after {
+    scale: 1 1;
 }
 .header__right {
     display: flex;
@@ -219,10 +234,9 @@ header {
     }
     .header__tel {
         font-size: 1.5rem;
-        text-decoration-line: none;
     }
-    .header__tel:hover {
-        text-decoration-line: none;
+    .header__tel::after {
+        display: none !important;
     }
     .header__right {
         display: flex;
@@ -261,6 +275,8 @@ header {
     padding-top: 8rem;
     width: 100%;
     padding-bottom: 4.6875rem;
+    position: relative;
+    z-index: 5;
 }
 .hero__wrap {
     height: 50rem;
@@ -470,84 +486,108 @@ header {
     position: absolute;
     bottom: -10.625rem;
     left: -34.875rem;
-    /* inset: 0; */
     z-index: 3;
     pointer-events: none;
 }
+
+/* базовый вид лавы — делаем заметнее */
 .feedback__lava-blob {
     position: absolute;
     inset: 0;
     border-radius: 81.875rem;
     background: radial-gradient(50% 50% at 50% 50%, #e0223b 0%, rgba(224, 34, 59, 0) 100%);
-    filter: blur(4.375rem) brightness(0.8);
-    opacity: 0.45;
-    mix-blend-mode: normal;
-    will-change: transform;
+
+    filter: blur(2.2rem) brightness(1.25) saturate(1.2); /* было 2.4rem blur */
+    opacity: 0.74;
+    mix-blend-mode: screen; /* ярче/живее на тёмном фоне */
+    will-change: transform, filter;
 }
 
+/* быстрее + разная динамика */
 .feedback__lava-blob--a {
-    opacity: 0.85;
-    animation: feedbackLava1 24s linear infinite;
+    opacity: 0.93;
+    animation: feedbackLava1 10s linear infinite;
 }
+
 .feedback__lava-blob--b {
-    opacity: 0.65;
+    opacity: 0.78;
     transform: scale(1.08);
-    animation: feedbackLava2 34s linear infinite;
+    animation: feedbackLava2 14s linear infinite;
 }
+
 .feedback__lava-blob--c {
-    opacity: 0.55;
+    opacity: 0.68;
     transform: scale(0.95);
-    animation: feedbackLava3 52s linear infinite;
+    animation: feedbackLava3 18s linear infinite;
 }
+
+/* Анимации: больше “жизни” (hue-rotate + лёгкая смена blur/brightness) */
 @keyframes feedbackLava1 {
     0% {
         transform: translate(0, -18rem) scale(1);
+        filter: blur(2.4rem) brightness(1.25) contrast(1.35) saturate(1.2) hue-rotate(0deg);
     }
     25% {
-        transform: translate(18rem, 0) scale(1.06);
+        transform: translate(18rem, 0) scale(1.08);
+        filter: blur(2.2rem) brightness(1.3) contrast(1.4) saturate(1.25) hue-rotate(8deg);
     }
     50% {
-        transform: translate(0, 18rem) scale(1.02);
+        transform: translate(0, 18rem) scale(1.03);
+        filter: blur(2.5rem) brightness(1.22) contrast(1.35) saturate(1.2) hue-rotate(0deg);
     }
     75% {
-        transform: translate(-18rem, 0) scale(1.07);
+        transform: translate(-18rem, 0) scale(1.09);
+        filter: blur(2.2rem) brightness(1.3) contrast(1.4) saturate(1.25) hue-rotate(-8deg);
     }
     100% {
         transform: translate(0, -18rem) scale(1);
+        filter: blur(2.4rem) brightness(1.25) contrast(1.35) saturate(1.2) hue-rotate(0deg);
     }
 }
+
 @keyframes feedbackLava2 {
     0% {
-        transform: translate(0, 20rem) scale(1.1);
+        transform: translate(0, 20rem) scale(1.12);
+        filter: blur(2.6rem) brightness(1.22) contrast(1.32) saturate(1.2) hue-rotate(0deg);
     }
     25% {
-        transform: translate(-20rem, 0) scale(1.03);
+        transform: translate(-20rem, 0) scale(1.05);
+        filter: blur(2.3rem) brightness(1.28) contrast(1.38) saturate(1.25) hue-rotate(10deg);
     }
     50% {
-        transform: translate(0, -20rem) scale(1.12);
+        transform: translate(0, -20rem) scale(1.15);
+        filter: blur(2.6rem) brightness(1.22) contrast(1.32) saturate(1.2) hue-rotate(0deg);
     }
     75% {
-        transform: translate(20rem, 0) scale(1.05);
+        transform: translate(20rem, 0) scale(1.07);
+        filter: blur(2.3rem) brightness(1.28) contrast(1.38) saturate(1.25) hue-rotate(-10deg);
     }
     100% {
-        transform: translate(0, 20rem) scale(1.1);
+        transform: translate(0, 20rem) scale(1.12);
+        filter: blur(2.6rem) brightness(1.22) contrast(1.32) saturate(1.2) hue-rotate(0deg);
     }
 }
+
 @keyframes feedbackLava3 {
     0% {
-        transform: translate(-12rem, -16rem) scale(0.96);
+        transform: translate(-12rem, -16rem) scale(0.98);
+        filter: blur(2.7rem) brightness(1.2) contrast(1.3) saturate(1.2) hue-rotate(0deg);
     }
     25% {
-        transform: translate(22rem, -6rem) scale(1.02);
+        transform: translate(22rem, -6rem) scale(1.05);
+        filter: blur(2.3rem) brightness(1.28) contrast(1.38) saturate(1.25) hue-rotate(12deg);
     }
     50% {
-        transform: translate(10rem, 22rem) scale(0.98);
+        transform: translate(10rem, 22rem) scale(1);
+        filter: blur(2.7rem) brightness(1.2) contrast(1.3) saturate(1.2) hue-rotate(0deg);
     }
     75% {
-        transform: translate(-24rem, 8rem) scale(1.03);
+        transform: translate(-24rem, 8rem) scale(1.06);
+        filter: blur(2.3rem) brightness(1.28) contrast(1.38) saturate(1.25) hue-rotate(-12deg);
     }
     100% {
-        transform: translate(-12rem, -16rem) scale(0.96);
+        transform: translate(-12rem, -16rem) scale(0.98);
+        filter: blur(2.7rem) brightness(1.2) contrast(1.3) saturate(1.2) hue-rotate(0deg);
     }
 }
 .feedback__wrap {
@@ -555,12 +595,14 @@ header {
     display: flex;
     gap: 2.5rem;
     position: relative;
-    z-index: 4;
+    /* z-index: 3; */
 }
 .feedback__left {
     width: 58.75rem;
     background: rgba(20, 20, 20, 0.6);
     padding: 3.375rem 7.0625rem 3.375rem 3.75rem;
+    position: relative;
+    z-index: 5;
 }
 .feedback .form {
     width: 100%;
@@ -911,81 +953,85 @@ header {
         bottom: -9.5rem;
         left: auto;
         right: -9.875rem;
+        pointer-events: none;
+        z-index: 3;
     }
     .feedback__lava-blob {
+        position: absolute;
+        inset: 0;
         border-radius: 26.6995rem;
         background: radial-gradient(50% 50% at 50% 50%, #e0223b 0%, rgba(224, 34, 59, 0) 100%);
-        filter: blur(3.2rem) brightness(0.8);
+        filter: blur(2.8rem) brightness(0.8);
         opacity: 0.45;
         mix-blend-mode: normal;
         will-change: transform;
     }
-
     .feedback__lava-blob--a {
-        opacity: 0.85;
-        animation: feedbackLava1_m 24s linear infinite;
+        opacity: 0.9;
+        animation: feedbackLava1_m 12s linear infinite;
     }
     .feedback__lava-blob--b {
-        opacity: 0.65;
-        animation: feedbackLava2_m 34s linear infinite;
+        opacity: 0.7;
+        animation: feedbackLava2_m 16s linear infinite;
     }
     .feedback__lava-blob--c {
-        opacity: 0.55;
-        animation: feedbackLava3_m 52s linear infinite;
+        opacity: 0.6;
+        animation: feedbackLava3_m 22s linear infinite;
     }
     @keyframes feedbackLava1_m {
         0% {
-            transform: translate(0, -7rem) scale(1);
+            transform: translate(0, -10rem) scale(1.02);
         }
         25% {
-            transform: translate(7rem, 0) scale(1.06);
+            transform: translate(10rem, 0) scale(1.1);
         }
         50% {
-            transform: translate(0, 7rem) scale(1.02);
+            transform: translate(0, 10rem) scale(1.05);
         }
         75% {
-            transform: translate(-7rem, 0) scale(1.07);
+            transform: translate(-10rem, 0) scale(1.12);
         }
         100% {
-            transform: translate(0, -7rem) scale(1);
+            transform: translate(0, -10rem) scale(1.02);
         }
     }
 
     @keyframes feedbackLava2_m {
         0% {
-            transform: translate(0, 8rem) scale(1.1);
+            transform: translate(0, 11rem) scale(1.12);
         }
         25% {
-            transform: translate(-8rem, 0) scale(1.03);
+            transform: translate(-11rem, 0) scale(1.06);
         }
         50% {
-            transform: translate(0, -8rem) scale(1.12);
+            transform: translate(0, -11rem) scale(1.15);
         }
         75% {
-            transform: translate(8rem, 0) scale(1.05);
+            transform: translate(11rem, 0) scale(1.08);
         }
         100% {
-            transform: translate(0, 8rem) scale(1.1);
+            transform: translate(0, 11rem) scale(1.12);
         }
     }
 
     @keyframes feedbackLava3_m {
         0% {
-            transform: translate(-5rem, -6rem) scale(0.96);
+            transform: translate(-8rem, -9rem) scale(0.98);
         }
         25% {
-            transform: translate(9rem, -2rem) scale(1.02);
+            transform: translate(13rem, -4rem) scale(1.06);
         }
         50% {
-            transform: translate(4rem, 9rem) scale(0.98);
+            transform: translate(6rem, 13rem) scale(1.02);
         }
         75% {
-            transform: translate(-10rem, 3rem) scale(1.03);
+            transform: translate(-14rem, 5rem) scale(1.07);
         }
         100% {
-            transform: translate(-5rem, -6rem) scale(0.96);
+            transform: translate(-8rem, -9rem) scale(0.98);
         }
     }
+
     .feedback__wrap {
         width: 22.375rem;
         margin: 0 auto;
@@ -1121,7 +1167,7 @@ header {
 .club-gallery-tochka {
     padding: 6.25rem 0 4.6875rem;
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
     /* overflow: hidden; */
 }
 .club-gallery-tochka__wrap {
@@ -1161,8 +1207,8 @@ header {
     z-index: 4;
 }
 .club-gallery-tochka__call-btn__wrap {
-    width: 26.25rem;
-    height: 5.75rem;
+    width: 26.5rem;
+    height: 6rem;
     position: relative;
     display: flex;
     justify-content: center;
@@ -1171,9 +1217,9 @@ header {
 }
 .club-gallery-tochka__call-btn {
     display: block;
-    width: 26.25rem;
-    height: 5.75rem;
-    line-height: 5.75rem;
+    width: 26.5rem;
+    height: 6rem;
+    line-height: 6rem;
     cursor: pointer;
     position: relative;
     cursor: pointer;
@@ -1275,7 +1321,7 @@ header {
 }
 .club-gallery-tochka__slider-btns button {
     width: 8.537rem;
-    height: 5.7356rem;
+    height: 6rem;
     display: flex;
     align-items: center;
     padding: 0 1.25rem;
@@ -1288,14 +1334,14 @@ header {
     background-image: url("data:image/svg+xml,%3Csvg width='137' height='92' viewBox='0 0 137 92' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23.0122 0L0 23.5585V91.7696H136.592V0H23.0122Z' fill='%23E0223B'/%3E%3C/svg%3E%0A");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
+    background-size: cover;
 }
 .club-gallery-tochka__slider-btns .club-gallery-tochka__slider-desctop-next {
     justify-content: end;
     background-image: url("data:image/svg+xml,%3Csvg width='137' height='92' viewBox='0 0 137 92' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M113.58 0L136.592 23.5584V91.7695H3.05176e-05V0H113.58Z' fill='%23E0223B'/%3E%3C/svg%3E%0A");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
+    background-size: cover;
 }
 .club-gallery-tochka__swiper {
     position: absolute;
@@ -1309,7 +1355,7 @@ header {
     align-items: stretch;
 }
 .club-gallery-tochka__swiper .swiper-slide {
-    width: 100%;
+    width: auto;
     height: 100%;
     overflow: hidden;
     display: flex;
@@ -1317,9 +1363,11 @@ header {
     justify-content: center;
 }
 .club-gallery-tochka__swiper .swiper-slide img {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    display: block;
 }
 .club-gallery-tochka__lava {
     width: 67.875rem;
@@ -1327,7 +1375,6 @@ header {
     position: absolute;
     top: -21.75rem;
     right: -8.9375rem;
-    /* inset: 0; */
     z-index: 1;
     pointer-events: none;
 }
@@ -1336,75 +1383,75 @@ header {
     inset: 0;
     border-radius: 81.875rem;
     background: radial-gradient(50% 50% at 50% 50%, #e0223b 0%, rgba(224, 34, 59, 0) 100%);
-    filter: blur(4.375rem) brightness(0.8);
-    opacity: 0.45;
+    filter: blur(3.6rem) brightness(0.8);
+    opacity: 0.55;
     mix-blend-mode: normal;
     will-change: transform;
 }
 
 .club-gallery-tochka__lava-blob--a {
-    opacity: 0.85;
-    animation: feedbackLava1 24s linear infinite;
+    opacity: 0.88;
+    animation: feedbackLava1 16s linear infinite;
 }
 .club-gallery-tochka__lava-blob--b {
-    opacity: 0.65;
+    opacity: 0.72;
     transform: scale(1.08);
-    animation: feedbackLava2 34s linear infinite;
+    animation: feedbackLava2 21s linear infinite;
 }
 .club-gallery-tochka__lava-blob--c {
-    opacity: 0.55;
+    opacity: 0.62;
     transform: scale(0.95);
-    animation: feedbackLava3 52s linear infinite;
+    animation: feedbackLava3 32s linear infinite;
 }
 @keyframes feedbackLava1 {
     0% {
-        transform: translate(0, -18rem) scale(1);
+        transform: translate(0, -24rem) scale(1);
     }
     25% {
-        transform: translate(18rem, 0) scale(1.06);
+        transform: translate(24rem, 0) scale(1.06);
     }
     50% {
-        transform: translate(0, 18rem) scale(1.02);
+        transform: translate(0, 24rem) scale(1.02);
     }
     75% {
-        transform: translate(-18rem, 0) scale(1.07);
+        transform: translate(-24rem, 0) scale(1.07);
     }
     100% {
-        transform: translate(0, -18rem) scale(1);
+        transform: translate(0, -24rem) scale(1);
     }
 }
 @keyframes feedbackLava2 {
     0% {
-        transform: translate(0, 20rem) scale(1.1);
+        transform: translate(0, 26rem) scale(1.1);
     }
     25% {
-        transform: translate(-20rem, 0) scale(1.03);
+        transform: translate(-26rem, 0) scale(1.03);
     }
     50% {
-        transform: translate(0, -20rem) scale(1.12);
+        transform: translate(0, -26rem) scale(1.12);
     }
     75% {
-        transform: translate(20rem, 0) scale(1.05);
+        transform: translate(26rem, 0) scale(1.05);
     }
     100% {
-        transform: translate(0, 20rem) scale(1.1);
+        transform: translate(0, 26rem) scale(1.1);
     }
 }
 @keyframes feedbackLava3 {
     0% {
-        transform: translate(-12rem, -16rem) scale(0.96);
+        transform: translate(-16rem, -22rem) scale(0.96);
     }
     25% {
-        transform: translate(22rem, -6rem) scale(1.02);
+        transform: translate(30rem, -10rem) scale(1.02);
     }
     50% {
-        transform: translate(10rem, 22rem) scale(0.98);
+        transform: translate(14rem, 30rem) scale(0.98);
     }
     75% {
-        transform: translate(-24rem, 8rem) scale(1.03);
+        transform: translate(-32rem, 12rem) scale(1.03);
     }
     100% {
-        transform: translate(-12rem, -16rem) scale(0.96);
+        transform: translate(-16rem, -22rem) scale(0.96);
     }
 }
 .club-gallery-tochka__slider-mob-prev,
@@ -1434,12 +1481,12 @@ header {
     }
     .club-gallery-tochka__call-btn__wrap {
         width: 100%;
-        height: 4.875rem;
+        height: 5rem;
     }
     .club-gallery-tochka__call-btn {
         width: 100%;
-        height: 4.875rem;
-        line-height: 4.875rem;
+        height: 5rem;
+        line-height: 5rem;
     }
     .club-gallery-tochka__call-btn .hl-line {
         stroke: #ffffff;
@@ -1517,70 +1564,70 @@ header {
     }
     .club-gallery-tochka__lava-blob {
         border-radius: 20.4375rem;
+        filter: blur(2.6rem) brightness(0.8);
+        opacity: 0.52;
     }
     .club-gallery-tochka__lava-blob--a {
-        opacity: 0.85;
-        animation: tochkaLava1_m 24s linear infinite;
+        opacity: 0.88;
+        animation: tochkaLava1_m 16s linear infinite;
     }
     .club-gallery-tochka__lava-blob--b {
-        opacity: 0.65;
-        animation: tochkaLava2_m 34s linear infinite;
+        opacity: 0.72;
+        animation: tochkaLava2_m 21s linear infinite;
     }
     .club-gallery-tochka__lava-blob--c {
-        opacity: 0.55;
-        animation: tochkaLava3_m 52s linear infinite;
+        opacity: 0.62;
+        animation: tochkaLava3_m 32s linear infinite;
     }
     @keyframes tochkaLava1_m {
         0% {
-            transform: translate(0, -6rem) scale(1);
+            transform: translate(0, -8rem) scale(1);
         }
         25% {
-            transform: translate(6rem, 0) scale(1.06);
+            transform: translate(8rem, 0) scale(1.06);
         }
         50% {
-            transform: translate(0, 6rem) scale(1.02);
+            transform: translate(0, 8rem) scale(1.02);
         }
         75% {
-            transform: translate(-6rem, 0) scale(1.07);
+            transform: translate(-8rem, 0) scale(1.07);
         }
         100% {
-            transform: translate(0, -6rem) scale(1);
+            transform: translate(0, -8rem) scale(1);
         }
     }
-
     @keyframes tochkaLava2_m {
         0% {
-            transform: translate(0, 7rem) scale(1.1);
+            transform: translate(0, 9rem) scale(1.1);
         }
         25% {
-            transform: translate(-7rem, 0) scale(1.03);
+            transform: translate(-9rem, 0) scale(1.03);
         }
         50% {
-            transform: translate(0, -7rem) scale(1.12);
+            transform: translate(0, -9rem) scale(1.12);
         }
         75% {
-            transform: translate(7rem, 0) scale(1.05);
+            transform: translate(9rem, 0) scale(1.05);
         }
         100% {
-            transform: translate(0, 7rem) scale(1.1);
+            transform: translate(0, 9rem) scale(1.1);
         }
     }
-
     @keyframes tochkaLava3_m {
         0% {
-            transform: translate(-4rem, -5rem) scale(0.96);
+            transform: translate(-6rem, -7rem) scale(0.96);
         }
         25% {
-            transform: translate(7rem, -2rem) scale(1.02);
+            transform: translate(10rem, -3rem) scale(1.02);
         }
         50% {
-            transform: translate(3rem, 7rem) scale(0.98);
+            transform: translate(4rem, 10rem) scale(0.98);
         }
         75% {
-            transform: translate(-8rem, 2rem) scale(1.03);
+            transform: translate(-11rem, 3rem) scale(1.03);
         }
         100% {
-            transform: translate(-4rem, -5rem) scale(0.96);
+            transform: translate(-6rem, -7rem) scale(0.96);
         }
     }
     .club-gallery-tochka__slider-mob-prev,
@@ -1633,6 +1680,12 @@ header {
     margin: 4.6875rem 0 6.25rem;
     overflow: hidden;
 }
+.promo1 {
+    background: url("../images/promo-bg.png") center / cover no-repeat;
+}
+.promo2 {
+    background: url("../images/promo-bg2.png") center / cover no-repeat;
+}
 .promo__wrap {
     padding: 8.3125rem 0 9.125rem;
     height: 100%;
@@ -1676,6 +1729,12 @@ header {
 @media (max-width: 768px) {
     .promo {
         margin: 3.125rem 0;
+    }
+    .promo1 {
+        background: url("../images/promo-bg-mob.png") center / cover no-repeat;
+    }
+    .promo2 {
+        background: url("../images/promo-bg2-mob.png") center / cover no-repeat;
     }
     .promo__wrap {
         padding: 3.125rem 0;
@@ -1734,19 +1793,19 @@ header {
 .marquee__row__items {
     display: flex;
     gap: 3.125rem;
-    justify-content: space-around;
-    min-width: 100%;
+    justify-content: flex-start;
+    min-width: max-content;
     flex-shrink: 0;
-    animation: scroll-left 35s linear infinite;
+    animation: none !important;
 }
-@keyframes scroll-left {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(calc(-100% - 1.25rem));
-    }
+.marquee__track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
+
 .marquee__item {
     color: #e0223b;
     font-size: 8.5625rem;
@@ -1760,13 +1819,10 @@ header {
     background-image:
         linear-gradient(to right, rgba(224, 34, 59, 1) 0%, rgba(224, 34, 59, 0) 100%),
         linear-gradient(to left, rgba(224, 34, 59, 1) 0%, rgba(224, 34, 59, 0) 100%);
-
     background-repeat: no-repeat;
-
     background-size:
         2.9375rem 100%,
         2.9375rem 100%;
-
     background-position:
         left top,
         right top;
@@ -1792,7 +1848,6 @@ header {
         #000 100%
     );
 }
-
 .marquee__layer--blur .marquee__item {
     filter: blur(0.6rem);
 }
@@ -1809,6 +1864,7 @@ header {
 .marquee__layer--clear .marquee__item {
     filter: none;
 }
+
 @media (max-width: 768px) {
     .marquee {
         padding: 3.125rem 0;
@@ -1826,11 +1882,11 @@ header {
         font-size: 3.9072rem;
         letter-spacing: 0.3126rem;
     }
+
     .marquee__layer--blur .marquee__row {
         background-size:
             1.6rem 100%,
             1.6rem 100%;
-
         background-image:
             linear-gradient(to right, rgba(224, 34, 59, 0.65) 0%, rgba(224, 34, 59, 0) 100%),
             linear-gradient(to left, rgba(224, 34, 59, 0.65) 0%, rgba(224, 34, 59, 0) 100%);
@@ -1857,6 +1913,7 @@ header {
         );
     }
 }
+
 /* marquee end  */
 
 /* club-gallery-maxim start  */
@@ -1916,8 +1973,8 @@ header {
     z-index: 4;
 }
 .club-gallery-maxim__call-btn__wrap {
-    width: 26.3125rem;
-    height: 5.75rem;
+    width: 26.5rem;
+    height: 6rem;
     position: relative;
     display: flex;
     justify-content: center;
@@ -1926,9 +1983,9 @@ header {
 }
 .club-gallery-maxim__call-btn {
     display: block;
-    width: 26.3125rem;
-    height: 5.75rem;
-    line-height: 5.75rem;
+    width: 26.5rem;
+    height: 6rem;
+    line-height: 6rem;
     cursor: pointer;
     position: relative;
     cursor: pointer;
@@ -2028,7 +2085,7 @@ header {
 }
 .club-gallery-maxim__slider-btns button {
     width: 8.537rem;
-    height: 5.7356rem;
+    height: 6rem;
     display: flex;
     align-items: center;
     padding: 0 1.25rem;
@@ -2049,14 +2106,14 @@ header {
     left: 2.6875rem;
     top: 0;
     height: 100%;
-    width: 30.8125rem;
+    width: calc(100% - 2.6875rem);
     overflow: visible;
 }
 .club-gallery-maxim__swiper .swiper-wrapper {
     align-items: stretch;
 }
 .club-gallery-maxim__swiper .swiper-slide {
-    width: 100%;
+    width: auto;
     height: 100%;
     overflow: hidden;
     display: flex;
@@ -2064,9 +2121,11 @@ header {
     justify-content: center;
 }
 .club-gallery-maxim__swiper .swiper-slide img {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    display: block;
 }
 .club-gallery-maxim__slider-mob-next,
 .club-gallery-maxim__slider-mob-prev {
@@ -2106,12 +2165,12 @@ header {
     }
     .club-gallery-maxim__call-btn__wrap {
         width: 100%;
-        height: 4.9012rem;
+        height: 5rem;
     }
     .club-gallery-maxim__call-btn {
         width: 100%;
-        height: 4.9012rem;
-        line-height: 4.9012rem;
+        height: 5rem;
+        line-height: 5rem;
     }
     .club-gallery-maxim__call-btn span {
         font-size: 2.8516rem;
@@ -2324,12 +2383,16 @@ footer {
     width: 100%;
     height: 100dvh;
     left: 0;
-    top: -100%;
+    top: 0;
+    transform: translate3d(0, -100%, 0);
+    transition: transform 0.7s ease;
+    will-change: transform;
     background: #000;
-    transition: all 0.7s ease;
+    pointer-events: none;
 }
 .menu-popup.active {
-    top: 0;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
 }
 .menu-popup__container {
     padding: 7.625rem 3.75rem 3.75rem;
@@ -2698,8 +2761,7 @@ footer {
     .contact__title.glitch::after {
         transform: translate(-0.18rem, -0.12rem);
     }
-
-    @keyframes glitch-red-smooth {
+    @keyframes contact-glitch-red-smooth {
         0% {
             clip-path: inset(0 0 0 0);
             transform: translate(-0.18rem, -0.12rem);
@@ -2735,7 +2797,7 @@ footer {
     }
     .contact__main {
         width: 20.5rem;
-        padding: 0.625rem 1.4375rem 1.875rem;
+        padding: 1.875rem 1.4375rem 1.875rem;
         gap: 1.4375rem;
         padding-left: 1.4375rem;
         margin-top: 1.5rem;
@@ -2913,14 +2975,16 @@ footer {
     line-height: 100%;
     letter-spacing: 0.5611rem;
     text-transform: uppercase;
+}
+.advantages__right__text-line {
     display: inline-block;
     position: relative;
 }
-.advantages__right__text.glitch {
+.advantages__right__text-line.glitch {
     display: inline-block;
     z-index: 1;
 }
-.advantages__right__text.glitch::after {
+.advantages__right__text-line.glitch::after {
     content: attr(data-text);
     position: absolute;
     inset: 0;
@@ -2935,8 +2999,8 @@ footer {
     white-space: pre-line;
 }
 
-.advantages__right__text.glitch:hover::after,
-.advantages__right__text.glitch.is-glitching::after {
+.advantages__right__text-line.glitch:hover::after,
+.advantages__right__text-line.glitch.is-glitching::after {
     opacity: 1;
     animation: advantages-glitch-red-smooth 1.15s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
 }

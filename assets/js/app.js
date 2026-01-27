@@ -103,7 +103,7 @@ if (tochkaSection) {
             spaceBetween: 5,
             speed: 700,
             breakpoints: {
-                769: { slidesPerView: 1, spaceBetween: 10 }
+                769: { spaceBetween: 10 }
             },
             navigation: {
                 nextEl: Array.from(tochkaNextBtns),
@@ -122,11 +122,11 @@ if (gallery) {
 
         new Swiper(swiperEl, {
             slidesPerView: 'auto',
-            loop: false,
+            loop: true,
             spaceBetween: 5,
-            speed: 700,
+            speed: 900,
             breakpoints: {
-                769: { slidesPerView: 1, spaceBetween: 10 }
+                769: { spaceBetween: 10 }
             },
             navigation: {
                 nextEl: Array.from(nextBtns),
@@ -146,14 +146,13 @@ if (gallery) {
     function openPopup(src) {
         if (!src) return;
 
-        // чистим и создаём video
         content.innerHTML = '';
 
         const video = document.createElement('video');
         video.src = src;
         video.controls = true;
         video.autoplay = true;
-        video.playsInline = true;   // важно для мобилок
+        video.playsInline = true;
         video.preload = 'metadata';
 
         content.appendChild(video);
@@ -168,7 +167,6 @@ if (gallery) {
         popup.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
 
-        // стопаем и удаляем
         const video = content.querySelector('video');
         if (video) {
             video.pause();
@@ -178,7 +176,6 @@ if (gallery) {
         content.innerHTML = '';
     }
 
-    // открыть по data-video
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-video]');
         if (!btn) return;
@@ -187,18 +184,121 @@ if (gallery) {
         openPopup(btn.getAttribute('data-video'));
     });
 
-    // закрыть по крестику
     closeBtn?.addEventListener('click', closePopup);
 
-    // закрыть по клику на фон
     popup.addEventListener('click', (e) => {
         if (e.target === popup) closePopup();
     });
 
-    // закрыть по Esc
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && popup.classList.contains('is-open')) {
             closePopup();
         }
     });
+})();
+
+
+(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    const BASE_DURATION = 35;
+
+    function setupRow(row) {
+        const base = row.querySelector('.marquee__row__items:not([aria-hidden="true"])')
+            || row.querySelector('.marquee__row__items');
+        if (!base) return null;
+
+        let track = row.querySelector('.marquee__track');
+        if (!track) {
+            track = document.createElement('div');
+            track.className = 'marquee__track';
+            const allItemsGroups = Array.from(row.querySelectorAll('.marquee__row__items'));
+            allItemsGroups.forEach(g => track.appendChild(g));
+            row.appendChild(track);
+        }
+
+        const groups = Array.from(track.querySelectorAll('.marquee__row__items'));
+        const template = groups[0];
+        groups.slice(1).forEach(g => g.remove());
+
+        template.removeAttribute('aria-hidden');
+
+        const state = {
+            row,
+            track,
+            template,
+            groupWidth: 0,
+            offset: 0,
+            pxPerSec: 60,
+        };
+
+        function measureAndFill() {
+            Array.from(track.children).slice(1).forEach(n => n.remove());
+
+            state.groupWidth = Math.ceil(template.getBoundingClientRect().width);
+            const wrapWidth = Math.ceil(row.getBoundingClientRect().width);
+
+            if (!state.groupWidth) return;
+
+            const needCopies = Math.max(2, Math.ceil((wrapWidth * 2) / state.groupWidth) + 1);
+
+            for (let i = 1; i < needCopies; i++) {
+                const clone = template.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            }
+
+            state.pxPerSec = state.groupWidth / BASE_DURATION;
+
+            state.offset = state.offset % state.groupWidth;
+            track.style.transform = `translate3d(${state.offset}px,0,0)`;
+        }
+
+        measureAndFill();
+
+        const ro = new ResizeObserver(() => measureAndFill());
+        ro.observe(row);
+
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => measureAndFill()).catch(() => { });
+        }
+
+        state.measureAndFill = measureAndFill;
+        return state;
+    }
+
+    function setupMarquee(wrap) {
+        const rows = wrap.querySelectorAll('.marquee__row');
+        if (!rows.length) return;
+
+        const states = Array.from(rows).map(setupRow).filter(Boolean);
+        if (!states.length) return;
+
+        let last = performance.now();
+
+        function tick(now) {
+            const dt = (now - last) / 1000;
+            last = now;
+
+            const s0 = states[0];
+            if (s0.groupWidth > 0) {
+                const dx = s0.pxPerSec * dt;
+
+                states.forEach(s => {
+                    s.offset -= dx;
+
+                    if (s.offset <= -s.groupWidth) s.offset += s.groupWidth;
+
+                    s.track.style.transform = `translate3d(${s.offset}px,0,0)`;
+                });
+            }
+
+            requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+    }
+
+    document.querySelectorAll('.marquee__wrap').forEach(setupMarquee);
 })();
