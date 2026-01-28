@@ -1236,7 +1236,10 @@ header {
     fill: none;
     pointer-events: none;
     z-index: 2;
+    transform: scale(0.99);
+    transform-origin: center;
 }
+
 .club-gallery-tochka__call-btn .bg-line,
 .club-gallery-tochka__call-btn .hl-line {
     stroke-width: 2;
@@ -2002,6 +2005,8 @@ header {
     fill: none;
     pointer-events: none;
     z-index: 2;
+    transform: scale(0.98);
+    transform-origin: center;
 }
 .club-gallery-maxim__call-btn .bg-line,
 .club-gallery-maxim__call-btn .hl-line {
