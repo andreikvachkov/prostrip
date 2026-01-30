@@ -2567,6 +2567,7 @@ footer {
 }
 .contact__wrap {
     display: flex;
+    align-items: start;
     margin: auto 0 0 0;
     gap: 2.5rem;
 }
@@ -2580,6 +2581,7 @@ footer {
     display: inline-block;
     margin-top: -1.25rem;
     order: 2;
+    pointer-events: none;
 }
 .contact__title.glitch {
     display: inline-block;
@@ -3106,7 +3108,7 @@ footer {
     flex-direction: column;
     border: 0.1627rem solid #e0223b;
     background: rgba(0, 0, 0, 0.5);
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 1.5rem 1.8125rem;
     flex: 1;
     height: 16.875rem;
 }
