@@ -99,20 +99,20 @@
                                 <p class="contact__name">
                                     Режим работы:
                                 </p>
-                                <p class="contact__text">
-                                    ежедневно с 22:00 до 6:00
-                                </p>
-                            </div>
-                            <div class="contact__item">
-                                <p class="contact__name">
-                                    Режим работы:
-                                </p>
                                 <div class="contact__address">
                                     <p class="name">Точка доступа - Ленинский просп., 18</p>
                                     <p class="address">
                                         максим - ул. Черняховского, 6А
                                     </p>
                                 </div>
+                            </div>
+                            <div class="contact__item">
+                                <p class="contact__name">
+                                    Режим работы:
+                                </p>
+                                <p class="contact__text">
+                                    ежедневно с 22:00 до 6:00
+                                </p>
                             </div>
                         </div>
                         <button class="contact__btn">
@@ -192,6 +192,10 @@
                 controls: ["zoomControl"]
             });
 
+            map.behaviors.disable('scrollZoom');
+            map.behaviors.disable('multiTouch');
+            map.behaviors.disable('dblClickZoom');
+
             map.options.set("suppressMapOpenBlock", true);
 
             const svg = `
@@ -204,19 +208,48 @@
             const iconW = 40;
             const iconH = 55;
 
+            const labels = ["Точка", "Максим"];
+
             points.forEach((coords, i) => {
+                const name = labels[i] || `Точка ${i + 1}`;
+
                 const pm = new ymaps.Placemark(
                     coords,
-                    { balloonContent: `Точка ${i + 1}` },
                     {
-                        iconLayout: "default#image",
+                        iconContent: name,
+                        hintContent: name,
+                        balloonContent: `<b>${name}</b>`
+                    },
+                    {
+                        iconLayout: "default#imageWithContent",
                         iconImageHref: iconHref,
                         iconImageSize: [iconW, iconH],
-                        iconImageOffset: [-iconW / 2, -iconH]
+                        iconImageOffset: [-iconW / 2, -iconH],
+
+                        iconContentOffset: [iconW / 2 + 30, -iconH / 2 + 50],
+
+                        iconContentLayout: ymaps.templateLayoutFactory.createClass(
+                            `
+        <div style="
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          white-space: nowrap;
+          font-weight: 600;
+          font-size: 14px;
+          color: #fff;
+          text-shadow: 0 2px 6px rgba(0,0,0,.75);
+          pointer-events: none;
+        ">$[properties.iconContent]</div>
+        `
+                        )
                     }
                 );
+
                 map.geoObjects.add(pm);
             });
+
+
             mapEl.classList.add("map-black");
 
             function fitRight() {

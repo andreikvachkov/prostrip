@@ -641,6 +641,9 @@ header {
     border-bottom: 0.141rem solid rgba(255, 255, 255, 0.6);
     background: none;
 }
+.feedback .form .form__row-select {
+    border-bottom: 0.141rem solid rgba(255, 255, 255, 0.6);
+}
 .feedback .form .form__input::placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
@@ -1070,6 +1073,9 @@ header {
         padding: 0.75rem;
         font-size: 1rem;
         letter-spacing: 0.02rem;
+        border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.6);
+    }
+    .feedback .form .form__row-select {
         border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.6);
     }
     .feedback .form .form__row.error .form__input {
@@ -2538,9 +2544,10 @@ footer {
 /* contact start  */
 
 .contact {
-    padding: 8.875rem 0 0;
+    padding: 9.625rem 0 0;
     position: relative;
     overflow: hidden;
+    height: 100vh;
 }
 .contact::before {
     content: "";
@@ -2549,21 +2556,30 @@ footer {
     height: 66.9118rem;
     border-radius: 66.9118rem;
     background: radial-gradient(50% 50% at 50% 50%, #e0223b 0%, rgba(224, 34, 59, 0) 100%);
-    top: 9.625rem;
+    bottom: -20.25rem;
     left: 21.0625rem;
     z-index: 2;
     pointer-events: none;
 }
+.contact .container {
+    height: 100%;
+    display: flex;
+}
+.contact__wrap {
+    display: flex;
+    margin: auto 0 0 0;
+    gap: 2.5rem;
+}
 .contact__title {
     font-size: 8.5625rem;
-    line-height: normal;
+    line-height: 100%;
     letter-spacing: 0.685rem;
     text-transform: uppercase;
-    margin-left: 2.1875rem;
     position: relative;
     z-index: 3;
     display: inline-block;
-    z-index: 1;
+    margin-top: -1.25rem;
+    order: 2;
 }
 .contact__title.glitch {
     display: inline-block;
@@ -2631,14 +2647,13 @@ footer {
 .contact__main {
     background: linear-gradient(180deg, rgba(20, 20, 20, 0.8) 12.39%, rgba(20, 20, 20, 0.8) 99.99%);
     width: 54.375rem;
-    padding: 3.25rem 2.1875rem 4.75rem;
+    padding: 3.25rem 2.1875rem 5.5rem;
     display: flex;
     flex-direction: column;
     gap: 4.375rem;
-    padding-left: 1.25rem;
-    margin-top: 2.5rem;
     position: relative;
     z-index: 3;
+    order: 1;
 }
 .contact__content {
     display: flex;
@@ -2719,7 +2734,7 @@ footer {
     background: linear-gradient(0deg, #e0223b 0%, #e0223b 100%), rgba(235, 154, 156, 0.6);
 }
 .contact__map {
-    height: 38.8125rem;
+    height: 37.5rem;
     width: 100%;
     position: absolute;
     left: 0;
@@ -2748,6 +2763,8 @@ footer {
 @media (max-width: 768px) {
     .contact {
         padding: 7.625rem 0 0;
+        display: flex;
+        flex-direction: column;
     }
     .contact::before {
         width: 39.875rem;
@@ -2757,6 +2774,16 @@ footer {
         top: 7.625rem;
         left: auto;
         right: -19.9375rem;
+        bottom: auto;
+    }
+    .contact .container {
+        height: auto;
+        display: block;
+    }
+    .contact__wrap {
+        display: block;
+        margin: 0;
+        gap: 0;
     }
     .contact__title {
         font-size: 3rem;
@@ -2841,12 +2868,14 @@ footer {
         display: none;
     }
     .contact__map {
-        height: 20.125rem;
+        height: auto;
         width: 100%;
         position: relative;
         left: 0;
         bottom: 0;
         z-index: 3;
+        flex: 1;
+        margin: auto 0 0 0;
     }
     #yandex-map [class*="ground-pane"] {
         filter: grayscale(1) brightness(0.22) contrast(1.25) saturate(0);
@@ -2886,11 +2915,12 @@ footer {
 /* advantages start  */
 
 .advantages {
-    padding: 9.6875rem 0 6.25rem;
+    padding: 9.375rem 0 2.5rem;
     background: url("../images/page-bg.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
+    min-height: 100vh;
 }
 .advantages__wrap {
     width: 100%;
@@ -2904,15 +2934,15 @@ footer {
 .advantages__left {
     display: flex;
     flex-direction: column;
-    gap: 1.4375rem;
+    gap: 2.8125rem;
 }
 .advantages__left__top {
     display: flex;
-    gap: 1.125rem;
+    gap: 2.5rem;
 }
 .advantages__left__one {
-    width: 18.0583rem;
-    height: 33.0256rem;
+    width: 16.6875rem;
+    height: 24.75rem;
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
@@ -2921,15 +2951,15 @@ footer {
 }
 .advantages .name {
     font-family: Murecho;
-    font-size: 2.2776rem;
+    font-size: 2rem;
     line-height: normal;
-    letter-spacing: 0.0456rem;
+    letter-spacing: 0.04rem;
 }
 .advantages__left__one .img {
     margin: auto 0 0 auto;
 }
 .advantages__left__one .img svg {
-    width: 9.2646rem;
+    width: 7.4958rem;
     height: auto;
 }
 .advantages__left__two {
@@ -2939,7 +2969,7 @@ footer {
     background: rgba(0, 0, 0, 0.5);
     padding: 2.375rem;
     flex: 1;
-    height: 33.0256rem;
+    height: 24.75rem;
 }
 .advantages__left__two .name {
     margin: auto 0 0 0;
@@ -2948,7 +2978,7 @@ footer {
     margin: 0 0 0 auto;
 }
 .advantages__left__two .img svg {
-    width: 10.1875rem;
+    width: 8.2424rem;
     height: auto;
 }
 .advantages__left__three {
@@ -2958,7 +2988,7 @@ footer {
     background: rgba(0, 0, 0, 0.5);
     padding: 2.375rem;
     width: 100%;
-    height: 16.8392rem;
+    height: 16.8125rem;
 }
 .advantages__left__three .name {
     margin: auto 0 0 0;
@@ -2976,9 +3006,9 @@ footer {
     gap: 0.625rem;
 }
 .advantages__right__text {
-    font-size: 7.0131rem;
+    font-size: 6.25rem;
     line-height: 100%;
-    letter-spacing: 0.5611rem;
+    letter-spacing: 0.5rem;
     text-transform: uppercase;
 }
 .advantages__right__text-line {
@@ -3053,12 +3083,12 @@ footer {
 .advantages__right__bottom {
     display: flex;
     margin: auto 0 0 0;
-    gap: 0.9375rem;
+    gap: 2.5rem;
 }
 .advantages__right__one {
-    width: 25.3299rem;
-    height: 21.7113rem;
-    padding: 1.5rem;
+    width: 16.6875rem;
+    height: 16.8125rem;
+    padding: 1.0625rem 1.6875rem;
     display: flex;
     flex-direction: column;
     border: 0.1627rem solid #e0223b;
@@ -3068,7 +3098,7 @@ footer {
     margin: auto 0 0 auto;
 }
 .advantages__right__one .img svg {
-    width: 9.4639rem;
+    width: 6.9039rem;
     height: auto;
 }
 .advantages__right__two {
@@ -3076,9 +3106,9 @@ footer {
     flex-direction: column;
     border: 0.1627rem solid #e0223b;
     background: rgba(0, 0, 0, 0.5);
-    padding: 1.5rem;
+    padding: 1.25rem 1.5rem;
     flex: 1;
-    height: 21.7113rem;
+    height: 16.875rem;
 }
 .advantages__right__two .name {
     margin: auto 0 0 0;
@@ -3087,7 +3117,7 @@ footer {
     margin: 0 0 0 auto;
 }
 .advantages__right__two .img svg {
-    width: 9.375rem;
+    width: 9.5135rem;
     height: auto;
 }
 .advantages__content-mob {
